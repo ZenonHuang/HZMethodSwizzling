@@ -50,9 +50,9 @@
 
 - (void)swizzled_viewWillAppear
 {
-    NSLog(@"swizzled object the method!");
-    // 调用旧的实现。因为它们已经被替换了
-        [self swizzled_viewWillAppear];
+//    NSLog(@"swizzled object the method!");
+//     调用旧的实现。因为它们已经被替换了
+//        [self swizzled_viewWillAppear];
 }
 
 @end

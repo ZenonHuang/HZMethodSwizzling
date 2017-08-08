@@ -18,22 +18,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-  
+
     
-    NSString *originalString = [NSString stringWithFormat:@"viewWillAppear:"];;
+    NSString *originalString = [NSString stringWithFormat:@"viewWillAppear:"];
     SEL originalSelector = NSSelectorFromString(originalString);
     
-    NSString *swizzledString = [NSString stringWithFormat:@"swizzled_viewWillAppear"];;
+    NSString *swizzledString = [NSString stringWithFormat:@"swizzled_vc_viewWillAppear:"];
     SEL swizzledSelector = NSSelectorFromString(swizzledString);
     
-    NSObject *obj = [NSObject new];
+//    NSObject *obj = [NSObject new];
     
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [obj performSelector:swizzledSelector withObject:nil];
+//    [obj performSelector:swizzledSelector withObject:nil];
 //    [obj performSelector:originalSelector withObject:nil];
-//    [self performSelector:swizzledSelector withObject:nil];
-//    [self performSelector:originalSelector withObject:nil];
+    [self performSelector:swizzledSelector withObject:@(YES)];
+    [self performSelector:originalSelector withObject:@(YES)];
 
 #pragma clang diagnostic pop
 
