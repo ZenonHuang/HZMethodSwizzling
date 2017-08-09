@@ -7,7 +7,8 @@
 //
 
 #import "ViewController.h"
-#import <objc/runtime.h>
+#import "HZCustomView.h"
+
 
 @interface ViewController ()
 
@@ -20,32 +21,23 @@
     // Do any additional setup after loading the view, typically from a nib.
 
     
-    NSString *originalString = [NSString stringWithFormat:@"viewWillAppear:"];
-    SEL originalSelector = NSSelectorFromString(originalString);
-    
-    NSString *swizzledString = [NSString stringWithFormat:@"swizzled_vc_viewWillAppear:"];
-    SEL swizzledSelector = NSSelectorFromString(swizzledString);
-    
-//    NSObject *obj = [NSObject new];
-    
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-//    [obj performSelector:swizzledSelector withObject:nil];
-//    [obj performSelector:originalSelector withObject:nil];
-    [self performSelector:swizzledSelector withObject:@(YES)];
-    [self performSelector:originalSelector withObject:@(YES)];
-
-#pragma clang diagnostic pop
-
-    
-    
-    Class class = [self class];
-    Method originalMethod = class_getInstanceMethod(class, originalSelector);
-    Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
-
-    NSLog(@"\n swizzled :%zd \n original :%zd ",swizzledMethod,originalMethod);
 }
 
+- (IBAction)tapMainButton:(id)sender {
+    HZCustomView *subView =[HZCustomView new];
+    [subView doSomething];
+}
+
+- (IBAction)tapNotMainButton:(id)sender {
+    
+    HZCustomView *subView =[HZCustomView new];
+ 
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(){
+        [subView doSomething];
+         
+    });
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -15,9 +15,10 @@
 		D65E31041F39638100E7A4B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D65E31021F39638100E7A4B8 /* LaunchScreen.storyboard */; };
 		D65E310F1F39638100E7A4B8 /* HZMethodSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E310E1F39638100E7A4B8 /* HZMethodSwizzlingTests.m */; };
 		D65E311A1F39638100E7A4B8 /* HZMethodSwizzlingUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E31191F39638100E7A4B8 /* HZMethodSwizzlingUITests.m */; };
-		D65E31291F39646600E7A4B8 /* UIViewController+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E31281F39646600E7A4B8 /* UIViewController+Swizzling.m */; };
-		D65E312C1F39B7D800E7A4B8 /* NSObject+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E312B1F39B7D800E7A4B8 /* NSObject+Swizzling.m */; };
 		D65E312F1F39B92900E7A4B8 /* ViewController+Swizzling.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E312E1F39B92900E7A4B8 /* ViewController+Swizzling.m */; };
+		D68887251F3AB37000D6D1E2 /* HZCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D68887241F3AB37000D6D1E2 /* HZCustomView.m */; };
+		D688872B1F3AE03C00D6D1E2 /* HZUIChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = D688872A1F3AE03C00D6D1E2 /* HZUIChecker.m */; };
+		D688872E1F3AE30000D6D1E2 /* HZSubCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D688872D1F3AE30000D6D1E2 /* HZSubCustomView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,12 +55,14 @@
 		D65E31151F39638100E7A4B8 /* HZMethodSwizzlingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HZMethodSwizzlingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65E31191F39638100E7A4B8 /* HZMethodSwizzlingUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HZMethodSwizzlingUITests.m; sourceTree = "<group>"; };
 		D65E311B1F39638100E7A4B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D65E31271F39645D00E7A4B8 /* UIViewController+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Swizzling.h"; sourceTree = "<group>"; };
-		D65E31281F39646600E7A4B8 /* UIViewController+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Swizzling.m"; sourceTree = "<group>"; };
-		D65E312A1F39B7CA00E7A4B8 /* NSObject+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Swizzling.h"; sourceTree = "<group>"; };
-		D65E312B1F39B7D800E7A4B8 /* NSObject+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Swizzling.m"; sourceTree = "<group>"; };
 		D65E312D1F39B91900E7A4B8 /* ViewController+Swizzling.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ViewController+Swizzling.h"; sourceTree = "<group>"; };
 		D65E312E1F39B92900E7A4B8 /* ViewController+Swizzling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ViewController+Swizzling.m"; sourceTree = "<group>"; };
+		D68887231F3AB36300D6D1E2 /* HZCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZCustomView.h; sourceTree = "<group>"; };
+		D68887241F3AB37000D6D1E2 /* HZCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZCustomView.m; sourceTree = "<group>"; };
+		D68887291F3AE02F00D6D1E2 /* HZUIChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZUIChecker.h; sourceTree = "<group>"; };
+		D688872A1F3AE03C00D6D1E2 /* HZUIChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZUIChecker.m; sourceTree = "<group>"; };
+		D688872C1F3AE2EF00D6D1E2 /* HZSubCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZSubCustomView.h; sourceTree = "<group>"; };
+		D688872D1F3AE30000D6D1E2 /* HZSubCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZSubCustomView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,11 +118,15 @@
 				D65E30F81F39638100E7A4B8 /* AppDelegate.m */,
 				D65E30FA1F39638100E7A4B8 /* ViewController.h */,
 				D65E30FB1F39638100E7A4B8 /* ViewController.m */,
+				D68887231F3AB36300D6D1E2 /* HZCustomView.h */,
+				D68887241F3AB37000D6D1E2 /* HZCustomView.m */,
 				D65E30FD1F39638100E7A4B8 /* Main.storyboard */,
 				D65E31001F39638100E7A4B8 /* Assets.xcassets */,
 				D65E31021F39638100E7A4B8 /* LaunchScreen.storyboard */,
 				D65E31051F39638100E7A4B8 /* Info.plist */,
 				D65E30F41F39638100E7A4B8 /* Supporting Files */,
+				D688872C1F3AE2EF00D6D1E2 /* HZSubCustomView.h */,
+				D688872D1F3AE30000D6D1E2 /* HZSubCustomView.m */,
 			);
 			path = HZMethodSwizzling;
 			sourceTree = "<group>";
@@ -153,12 +160,10 @@
 		D65E31301F39C41E00E7A4B8 /* Swizzling */ = {
 			isa = PBXGroup;
 			children = (
-				D65E31271F39645D00E7A4B8 /* UIViewController+Swizzling.h */,
-				D65E31281F39646600E7A4B8 /* UIViewController+Swizzling.m */,
-				D65E312A1F39B7CA00E7A4B8 /* NSObject+Swizzling.h */,
-				D65E312B1F39B7D800E7A4B8 /* NSObject+Swizzling.m */,
 				D65E312D1F39B91900E7A4B8 /* ViewController+Swizzling.h */,
 				D65E312E1F39B92900E7A4B8 /* ViewController+Swizzling.m */,
+				D68887291F3AE02F00D6D1E2 /* HZUIChecker.h */,
+				D688872A1F3AE03C00D6D1E2 /* HZUIChecker.m */,
 			);
 			name = Swizzling;
 			sourceTree = "<group>";
@@ -296,11 +301,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D65E31291F39646600E7A4B8 /* UIViewController+Swizzling.m in Sources */,
+				D68887251F3AB37000D6D1E2 /* HZCustomView.m in Sources */,
+				D688872E1F3AE30000D6D1E2 /* HZSubCustomView.m in Sources */,
 				D65E30FC1F39638100E7A4B8 /* ViewController.m in Sources */,
 				D65E30F91F39638100E7A4B8 /* AppDelegate.m in Sources */,
-				D65E312C1F39B7D800E7A4B8 /* NSObject+Swizzling.m in Sources */,
 				D65E312F1F39B92900E7A4B8 /* ViewController+Swizzling.m in Sources */,
+				D688872B1F3AE03C00D6D1E2 /* HZUIChecker.m in Sources */,
 				D65E30F61F39638100E7A4B8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +539,7 @@
 				D65E31201F39638100E7A4B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D65E31211F39638100E7A4B8 /* Build configuration list for PBXNativeTarget "HZMethodSwizzlingTests" */ = {
 			isa = XCConfigurationList;
@@ -541,6 +548,7 @@
 				D65E31231F39638100E7A4B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D65E31241F39638100E7A4B8 /* Build configuration list for PBXNativeTarget "HZMethodSwizzlingUITests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +557,7 @@
 				D65E31261F39638100E7A4B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
