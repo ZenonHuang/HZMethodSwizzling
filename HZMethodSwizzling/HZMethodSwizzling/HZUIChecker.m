@@ -187,10 +187,10 @@ static IMP getMsgForwardIMP(Class class,SEL selector){
 }
 static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selector, NSInvocation *invocation)
 {
-    if (![NSThread currentThread].isMainThread)
+    if (![HZUIChecker isMainQueue])
     {
         NSLog(@"%@ ",[NSThread callStackSymbols]);
-        NSCAssert([NSThread currentThread].isMainThread, @"操作不在主线程");
+        NSCAssert([HZUIChecker isMainQueue], @"操作不在主队列");
     }
     
     //正常执行的时候回通过ORIG_前缀名获取到当前函数的原始方法
@@ -203,5 +203,15 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     [invocation invoke];
 }
 
-
++ (BOOL)isMainQueue {
+    static const void* mainQueueKey = @"mainQueue";
+    static void* mainQueueContext = @"mainQueue";
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dispatch_queue_set_specific(dispatch_get_main_queue(), mainQueueKey, mainQueueContext, nil);
+    });
+    
+    return dispatch_get_specific(mainQueueKey) == mainQueueContext;
+}
 @end
