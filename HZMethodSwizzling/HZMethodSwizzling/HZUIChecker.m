@@ -18,6 +18,8 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
 @implementation HZUIChecker
 
 +(void)load{
+    
+   
     /** step1 获取程序文件所有 UI 类（不包括系统框架等,可由开发者创建和修改的class） **/
     unsigned int count;
     const char **classes;
@@ -190,7 +192,7 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     if (![HZUIChecker isMainQueue])
     {
         NSLog(@"%@ ",[NSThread callStackSymbols]);
-        NSCAssert([HZUIChecker isMainQueue], @"操作不在主队列");
+        NSCAssert([HZUIChecker isMainQueue], @"--- HZUIChecker --- 操作不在主队列");
     }
     
     //正常执行的时候回通过ORIG_前缀名获取到当前函数的原始方法

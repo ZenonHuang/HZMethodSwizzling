@@ -23,6 +23,10 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 - (IBAction)tapMainButton:(id)sender {
     HZCustomView *subView =[HZCustomView new];
     [subView doSomething];

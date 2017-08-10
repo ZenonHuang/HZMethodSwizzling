@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "Aspects.h"
+#import "HZCustomView.h"
 
 @interface AppDelegate ()
 
@@ -16,6 +18,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [UIViewController aspect_hookSelector:@selector(viewWillAppear:) withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> info,BOOL animated){
+        NSLog(@"aspect vc");
+    } error:nil];
+    
+    SEL selector =  NSSelectorFromString(@"doSomething");
+    [HZCustomView aspect_hookSelector:selector withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> info){
+        NSLog(@"aspect customview");
+    } error:nil];
+    
     // Override point for customization after application launch.
     return YES;
 }
