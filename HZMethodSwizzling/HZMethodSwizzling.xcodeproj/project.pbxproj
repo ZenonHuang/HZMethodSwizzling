@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42947714FCF0582F0D1097BF /* libPods-HZMethodSwizzling.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AAB8504BF753FA2CAC4532 /* libPods-HZMethodSwizzling.a */; };
 		D63DAFAA1F3C60A0002C512C /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D63DAFA91F3C60A0002C512C /* Aspects.m */; };
 		D65E30F61F39638100E7A4B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E30F51F39638100E7A4B8 /* main.m */; };
 		D65E30F91F39638100E7A4B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E30F81F39638100E7A4B8 /* AppDelegate.m */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		17AAB8504BF753FA2CAC4532 /* libPods-HZMethodSwizzling.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HZMethodSwizzling.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		57C848D923A958FF3B1B73B8 /* Pods-HZMethodSwizzling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZMethodSwizzling.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZMethodSwizzling/Pods-HZMethodSwizzling.debug.xcconfig"; sourceTree = "<group>"; };
 		D63DAFA81F3C60A0002C512C /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		D63DAFA91F3C60A0002C512C /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		D65E30F11F39638100E7A4B8 /* HZMethodSwizzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZMethodSwizzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -66,6 +69,7 @@
 		D688872A1F3AE03C00D6D1E2 /* HZUIChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZUIChecker.m; sourceTree = "<group>"; };
 		D688872C1F3AE2EF00D6D1E2 /* HZSubCustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZSubCustomView.h; sourceTree = "<group>"; };
 		D688872D1F3AE30000D6D1E2 /* HZSubCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZSubCustomView.m; sourceTree = "<group>"; };
+		DA8D431096DB6E27EABAF73F /* Pods-HZMethodSwizzling.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZMethodSwizzling.release.xcconfig"; path = "Pods/Target Support Files/Pods-HZMethodSwizzling/Pods-HZMethodSwizzling.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42947714FCF0582F0D1097BF /* libPods-HZMethodSwizzling.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +98,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		291502A6DB7E0754546D06DA /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				57C848D923A958FF3B1B73B8 /* Pods-HZMethodSwizzling.debug.xcconfig */,
+				DA8D431096DB6E27EABAF73F /* Pods-HZMethodSwizzling.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A61BB5CB06359DA15EAC71EA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				17AAB8504BF753FA2CAC4532 /* libPods-HZMethodSwizzling.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D65E30E81F39638100E7A4B8 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +122,8 @@
 				D65E310D1F39638100E7A4B8 /* HZMethodSwizzlingTests */,
 				D65E31181F39638100E7A4B8 /* HZMethodSwizzlingUITests */,
 				D65E30F21F39638100E7A4B8 /* Products */,
+				291502A6DB7E0754546D06DA /* Pods */,
+				A61BB5CB06359DA15EAC71EA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,9 +204,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D65E311E1F39638100E7A4B8 /* Build configuration list for PBXNativeTarget "HZMethodSwizzling" */;
 			buildPhases = (
+				D5106104A9BC2B25CEFEEB6F /* [CP] Check Pods Manifest.lock */,
 				D65E30ED1F39638100E7A4B8 /* Sources */,
 				D65E30EE1F39638100E7A4B8 /* Frameworks */,
 				D65E30EF1F39638100E7A4B8 /* Resources */,
+				C26045187DAE5CAF99E65127 /* [CP] Embed Pods Frameworks */,
+				4A4C39AB6CD1DE791A72BBA3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -300,6 +327,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4A4C39AB6CD1DE791A72BBA3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HZMethodSwizzling/Pods-HZMethodSwizzling-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C26045187DAE5CAF99E65127 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HZMethodSwizzling/Pods-HZMethodSwizzling-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5106104A9BC2B25CEFEEB6F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D65E30ED1F39638100E7A4B8 /* Sources */ = {
@@ -460,6 +535,7 @@
 		};
 		D65E311F1F39638100E7A4B8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57C848D923A958FF3B1B73B8 /* Pods-HZMethodSwizzling.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HZMethodSwizzling/Info.plist;
@@ -471,6 +547,7 @@
 		};
 		D65E31201F39638100E7A4B8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA8D431096DB6E27EABAF73F /* Pods-HZMethodSwizzling.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = HZMethodSwizzling/Info.plist;
