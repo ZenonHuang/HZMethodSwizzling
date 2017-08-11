@@ -38,7 +38,6 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
         //3.遍历并打印，转换Objective-C的字符串
         NSString *className = [NSString stringWithCString:classes[i] encoding:NSUTF8StringEncoding];
         Class class = NSClassFromString(className);
-        NSLog(@"every class name = %@", class);
         //检测 class 是否为 UIView 或 UIView 子类
         if ([HZUIChecker checkUISubClass:class]) {
             NSLog(@"UI SubClass -- %@", NSStringFromClass(class));
@@ -83,7 +82,7 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
         objc_property_t property = properties[i];
         const char *name =property_getName(property);
         [ignoreMethods addObject:@(name)];
-        printf("property name %d : %s\n", i, name);
+//        printf("property name %d : %s\n", i, name);
     }
     free(properties);
     
@@ -155,33 +154,17 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
 static IMP getMsgForwardIMP(Class class,SEL selector){
     IMP msgForwardIMP = _objc_msgForward;
 #if !defined(__arm64__)
-    // As an ugly internal runtime implementation detail in the 32bit runtime, we need to determine of the method we hook returns a struct or anything larger than id.
-    // https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/LowLevelABI/000-Introduction/introduction.html
-    // https://github.com/ReactiveCocoa/ReactiveCocoa/issues/783
-    // http://infocenter.arm.com/help/topic/com.arm.doc.ihi0042e/IHI0042E_aapcs.pdf (Section 5.4)
+
     Method method = class_getInstanceMethod(class, selector);
     const char *encoding = method_getTypeEncoding(method);
-    
-    
-    //    NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:typeDescription];
-    //    if ([methodSignature.debugDescription rangeOfString:@"is special struct return? YES"].location != NSNotFound) {//通过检测对应字符串判断有问题的struct
-    //        msgForwardIMP = (IMP)_objc_msgForward_stret;
-    //    }
-    
-    BOOL methodReturnsStructValue = encoding[0] == _C_STRUCT_B;
-    if (methodReturnsStructValue) {
-        @try {
-            NSUInteger valueSize = 0;
-            NSGetSizeAndAlignment(encoding, &valueSize, NULL);//取得对象的大小
-            
-            if (valueSize == 1 || valueSize == 2 || valueSize == 4 || valueSize == 8) {
-                methodReturnsStructValue = NO;
-            }
-        } @catch (__unused NSException *e) {}
+
+    if ( encoding[0] == _C_STRUCT_B) {
+        NSMethodSignature *methodSignature = [NSMethodSignature signatureWithObjCTypes:encoding];
+        if ([methodSignature.debugDescription rangeOfString:@"is special struct return? YES"].location != NSNotFound) {//对于某些架构某些 struct，返回值必须使用 _objc_msgForward_stret 代替 _objc_msgForward
+            msgForwardIMP = (IMP)_objc_msgForward_stret;
+        }
     }
-    if (methodReturnsStructValue) { //对于某些架构某些 struct，返回值必须使用 _objc_msgForward_stret 代替 _objc_msgForward
-        msgForwardIMP = (IMP)_objc_msgForward_stret;
-    }
+  
     
 
 #endif
@@ -189,6 +172,7 @@ static IMP getMsgForwardIMP(Class class,SEL selector){
 }
 static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selector, NSInvocation *invocation)
 {
+
     if (![HZUIChecker isMainQueue])
     {
         NSLog(@"%@ ",[NSThread callStackSymbols]);
@@ -201,8 +185,25 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     NSString *origSelectorName = [NSString stringWithFormat:@"ORIG_%@", selectorName];
     SEL origSelector = NSSelectorFromString(origSelectorName);
     
-    invocation.selector = origSelector;
-    [invocation invoke];
+    Class klass = object_getClass(invocation.target);
+
+        if ([klass instancesRespondToSelector:origSelector]) { //实例能否响应交换后的方法
+            invocation.selector = origSelector;
+            [invocation invoke];
+        }else{ //失败则尝试用原来的方法
+            SEL originalForwardInvocationSEL = invocation.selector ;
+            if ([slf respondsToSelector:originalForwardInvocationSEL]) {
+                //重新走消息转发
+                ((void( *)(id, SEL, NSInvocation *))objc_msgSend)(slf, originalForwardInvocationSEL, invocation);
+    
+            }else {
+                [slf doesNotRecognizeSelector:invocation.selector];
+            }
+
+        
+        }
+
+
 }
 
 + (BOOL)isMainQueue {
