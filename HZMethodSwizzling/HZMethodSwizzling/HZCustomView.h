@@ -10,5 +10,6 @@
 
 @interface HZCustomView : UIView
 @property (nonatomic,strong) UIButton *HZCustomButton;
+- (CGPoint)funcToSwizzleReturnPoint:(CGPoint)point;
 -(void)doSomething;
 @end

@@ -23,7 +23,7 @@
         NSLog(@"aspect vc");
     } error:nil];
     
-    SEL selector =  NSSelectorFromString(@"doSomething");
+    SEL selector =  NSSelectorFromString(@"funcToSwizzleReturnPoint:");
     [HZCustomView aspect_hookSelector:selector withOptions:AspectPositionAfter usingBlock:^(id<AspectInfo> info){
         NSLog(@"aspect customview");
     } error:nil];

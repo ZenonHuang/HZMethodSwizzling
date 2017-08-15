@@ -16,5 +16,9 @@
     NSLog(@"do do do ");
   
 }
-
+- (CGPoint)funcToSwizzleReturnPoint:(CGPoint)point
+{
+       NSLog(@"cgPoint");
+    return CGPointZero;
+}
 @end

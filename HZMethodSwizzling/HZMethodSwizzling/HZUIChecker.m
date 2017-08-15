@@ -19,36 +19,49 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
 
 +(void)load{
     
-   
+    NSArray *ignoreClasses = @[@"IQToolbar"];
+    
     /** step1 获取程序文件所有 UI 类（不包括系统框架等,可由开发者创建和修改的class） **/
     unsigned int count;
     const char **classes;
     Dl_info info;
     
-    //1.获取app的路径
+    //获取app的路径
     dladdr(&_mh_execute_header, &info);
-    
-    //2.返回当前运行的app的所有类的名字，并传出个数
-    //classes：二维数组 存放所有类的列表名称
-    //count：所有的类的个数
+    //返回当前运行的app的所有类的名字，并传出个数
     classes = objc_copyClassNamesForImage(info.dli_fname, &count);
     
     NSMutableArray *needClassList = [NSMutableArray new];
     for (int i = 0; i < count; i++) {
-        //3.遍历并打印，转换Objective-C的字符串
         NSString *className = [NSString stringWithCString:classes[i] encoding:NSUTF8StringEncoding];
         Class class = NSClassFromString(className);
-        //检测 class 是否为 UIView 或 UIView 子类
-        if ([HZUIChecker checkUISubClass:class]) {
-            NSLog(@"UI SubClass -- %@", NSStringFromClass(class));
-            [needClassList addObject:class];
+        
+        
+        BOOL needIgnore = NO;
+        for (NSString  *ignoreClassName in ignoreClasses) {
+            Class ignoreClass = NSClassFromString(ignoreClassName);
+            if ([class  isSubclassOfClass:ignoreClass]) {//是否为忽略类，或者忽略类的子类
+                needIgnore = YES;
+                continue;
+            }
         }
+        
+        if (!needIgnore ) {//并不在忽略类中
+//            if ([HZUIChecker checkUISubClass:class]) {  //检测是否属于UIView 
+//                NSLog(@"UI SubClass -- %@", NSStringFromClass(class));
+//                [needClassList addObject:class];
+//            }
+            if ([class isSubclassOfClass:UIView.class]) {  //检测是否属于UIView
+                NSLog(@"UI SubClass -- %@", NSStringFromClass(class));
+                [needClassList addObject:class];
+            }
+        }
+       
     }
     //step2 对每一个类的 method 进行获取
     for (Class class in needClassList) {
         [HZUIChecker exchangeMethod:class];
     }
-    //step3 交换 method,即修改 method,加入检测主队列（非主线程，主线程不一定安全）代码
     
     free(classes);
 }
@@ -82,7 +95,7 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
         objc_property_t property = properties[i];
         const char *name =property_getName(property);
         [ignoreMethods addObject:@(name)];
-//        printf("property name %d : %s\n", i, name);
+
     }
     free(properties);
     
