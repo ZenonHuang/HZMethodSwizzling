@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "HZSubCustomView.h"
+#import "HZSub2CustomView.h"
 
 
 @interface ViewController ()
@@ -30,7 +31,7 @@
 }
 
 - (IBAction)tapMainButton:(id)sender {
-    HZSubCustomView *subView =[HZSubCustomView new];
+    HZSub2CustomView *subView =[HZSub2CustomView new];
     [subView doSomething];
 //    [super viewWillAppear:YES];
 }

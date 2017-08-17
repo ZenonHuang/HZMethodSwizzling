@@ -19,8 +19,6 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
 
 +(void)load{
     
-    return;
-    
     NSArray *ignoreClasses = @[@"IQToolbar",@"GetGameDetailResponse"];
     
     /** step1 获取程序文件所有 UI 类（不包括系统框架等,可由开发者创建和修改的class） **/
@@ -85,22 +83,7 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     free(classes);
 }
 
-+(BOOL)checkUISubClass:(Class)class{
-    
-    if (!class_getSuperclass(class)) { //没有有父类
-        return NO;
-    }
-    
-    BOOL isUI = NO;
-    
-    if (class_getSuperclass(class) == [UIView class]){ //父类是否 UIView
-        return YES;
-    }
-    
-    isUI = [HZUIChecker checkUISubClass:class_getSuperclass(class)];
-    
-    return isUI;
-}
+
 
 +(void)addMethod:(Class)class{
     
@@ -136,14 +119,23 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
             }
         }
         
-        //是否响应
-        BOOL respondsToSelector = YES;
-        if (![class respondsToSelector:selector] && ![class instancesRespondToSelector:selector]) {
-            respondsToSelector = NO;
-        }
         
-        if (!needIgnore && respondsToSelector)
+        
+        if (!needIgnore )
         {
+            //是否响应,并且父类是否没有此seletor
+            BOOL respondsToSelector = [HZUIChecker checkUISubClass:class selector:selector];
+            
+            if (respondsToSelector) {
+                NSLog(@"YES %@",NSStringFromSelector(selector));
+            }else{
+                NSLog(@"NO %@",NSStringFromSelector(selector));
+            }
+            
+            if (!respondsToSelector) {
+                return ;
+            }
+            
             //得到实例方法对应 IMP
             Method targetMethod = class_getInstanceMethod(class, selector);
             IMP targetMethodIMP = method_getImplementation(targetMethod);
@@ -160,12 +152,59 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     free(methodList);
 }
 
+
+
+/**
+ 检测方法是否可用作转发：
+ 1.父类没有此方法
+ 2.自身可以对此进行响应
+
+ @param class 类
+ @param selector 方法
+ @return NO 表示不可以用，YES 表示可以
+ */
++(BOOL)checkUISubClass:(Class)class selector:(SEL)selector{
+    
+    if (!class_getSuperclass(class)) { //没有有父类
+        if ([class instancesRespondToSelector:selector]) {//自身可以响应
+            return YES;
+        }
+        return NO;
+    }
+    
+    
+    if (class == [UIView class]) { //UIView 本身
+        if ([class instancesRespondToSelector:selector]) {//自身可以响应
+            return YES;
+        }
+        return NO;
+    }
+    
+    
+   BOOL isUI = NO;
+    
+   if ([class_getSuperclass(class) instancesRespondToSelector:selector]) {//父类可以响应
+       if ([class instancesRespondToSelector:selector]) {//自身也可以响应，所以父类优先，本身不响应
+           return NO;
+       }
+   }else{
+       if ([class instancesRespondToSelector:selector]) {//父类不响应，本身响应
+           return YES;
+       }
+   }
+ 
+    
+    isUI = [HZUIChecker checkUISubClass:class_getSuperclass(class) selector:selector];
+    
+    return isUI;
+}
+
 +(void)replaceMethod:(Class) cls methodName:(NSString *)selectorName
 {
+    
     NSLog(@"replace class %@ selector %@",NSStringFromClass(cls),selectorName);
-    
     SEL selector = NSSelectorFromString(selectorName);
-    
+
     Method method = class_getInstanceMethod(cls, selector);
     const char *typeDescription = (char *)method_getTypeEncoding(method);
     
@@ -254,19 +293,7 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     NSString *origSelectorName = [NSString stringWithFormat:@"ORIG_%@",selectorName];
     SEL origSelector = NSSelectorFromString(origSelectorName);
 
-    Class superClass = class_getSuperclass(class);
-    if (superClass) {
-        if ([invocation.target isMemberOfClass:superClass]) {
-            NSString *superSeletorName = [NSString stringWithFormat:@"ORIG_%@_%@",NSStringFromClass(superClass),selectorName];
-            SEL superSeletor= NSSelectorFromString(superSeletorName);
-            if ([superClass instancesRespondToSelector:superSeletor]) {
-                invocation.selector = superSeletor;
-                [invocation invoke];
-                
-                return;
-            }
-        }
-    }
+
     
     if ([class instancesRespondToSelector:origSelector]) { //实例能否响应交换后的方法
         invocation.selector = origSelector;

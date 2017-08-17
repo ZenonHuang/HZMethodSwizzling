@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42947714FCF0582F0D1097BF /* libPods-HZMethodSwizzling.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 17AAB8504BF753FA2CAC4532 /* libPods-HZMethodSwizzling.a */; };
 		D63DAFAA1F3C60A0002C512C /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = D63DAFA91F3C60A0002C512C /* Aspects.m */; };
+		D6409B161F45C6D4007054D4 /* HZSub2CustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6409B151F45C6D4007054D4 /* HZSub2CustomView.m */; };
 		D65E30F61F39638100E7A4B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E30F51F39638100E7A4B8 /* main.m */; };
 		D65E30F91F39638100E7A4B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E30F81F39638100E7A4B8 /* AppDelegate.m */; };
 		D65E30FC1F39638100E7A4B8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D65E30FB1F39638100E7A4B8 /* ViewController.m */; };
@@ -45,6 +46,8 @@
 		57C848D923A958FF3B1B73B8 /* Pods-HZMethodSwizzling.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HZMethodSwizzling.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HZMethodSwizzling/Pods-HZMethodSwizzling.debug.xcconfig"; sourceTree = "<group>"; };
 		D63DAFA81F3C60A0002C512C /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		D63DAFA91F3C60A0002C512C /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
+		D6409B141F45C6C5007054D4 /* HZSub2CustomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HZSub2CustomView.h; sourceTree = "<group>"; };
+		D6409B151F45C6D4007054D4 /* HZSub2CustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HZSub2CustomView.m; sourceTree = "<group>"; };
 		D65E30F11F39638100E7A4B8 /* HZMethodSwizzling.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HZMethodSwizzling.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D65E30F51F39638100E7A4B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D65E30F71F39638100E7A4B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				D65E30F41F39638100E7A4B8 /* Supporting Files */,
 				D688872C1F3AE2EF00D6D1E2 /* HZSubCustomView.h */,
 				D688872D1F3AE30000D6D1E2 /* HZSubCustomView.m */,
+				D6409B141F45C6C5007054D4 /* HZSub2CustomView.h */,
+				D6409B151F45C6D4007054D4 /* HZSub2CustomView.m */,
 			);
 			path = HZMethodSwizzling;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 				D688872B1F3AE03C00D6D1E2 /* HZUIChecker.m in Sources */,
 				D65E30F61F39638100E7A4B8 /* main.m in Sources */,
 				D63DAFAA1F3C60A0002C512C /* Aspects.m in Sources */,
+				D6409B161F45C6D4007054D4 /* HZSub2CustomView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
