@@ -13,6 +13,9 @@
 #import <dlfcn.h>
 #import <mach-o/ldsyms.h>
 
+
+#ifdef DEBUG
+
 static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selector, NSInvocation *invocation);
 
 @implementation HZUIChecker
@@ -202,7 +205,7 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
 +(void)replaceMethod:(Class) cls methodName:(NSString *)selectorName
 {
     
-    NSLog(@"replace class %@ selector %@",NSStringFromClass(cls),selectorName);
+//    NSLog(@"replace class %@ selector %@",NSStringFromClass(cls),selectorName);
     SEL selector = NSSelectorFromString(selectorName);
 
     Method method = class_getInstanceMethod(cls, selector);
@@ -327,3 +330,4 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
     return dispatch_get_specific(mainQueueKey) == mainQueueContext;
 }
 @end
+#endif

@@ -9,5 +9,5 @@
 #import "HZCustomView.h"
 
 @interface HZSubCustomView : HZCustomView
--(void)doSomething;
+//-(void)doSomething;
 @end

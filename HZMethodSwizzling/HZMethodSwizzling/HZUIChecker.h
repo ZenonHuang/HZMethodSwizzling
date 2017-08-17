@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#ifdef DEBUG
 @interface HZUIChecker : NSObject
 
 @end
-
+#endif
