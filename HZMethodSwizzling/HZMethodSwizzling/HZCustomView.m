@@ -18,7 +18,7 @@
 }
 - (CGPoint)funcToSwizzleReturnPoint:(CGPoint)point
 {
-       NSLog(@"cgPoint");
+    NSLog(@"cgPoint");
     return CGPointZero;
 }
 @end

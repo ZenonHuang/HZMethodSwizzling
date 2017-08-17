@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "HZCustomView.h"
+#import "HZSubCustomView.h"
 
 
 @interface ViewController ()
@@ -30,9 +30,9 @@
 }
 
 - (IBAction)tapMainButton:(id)sender {
-    HZCustomView *subView =[HZCustomView new];
-//    [subView doSomething];
-    [subView funcToSwizzleReturnPoint:CGPointMake(8, 8)];
+    HZSubCustomView *subView =[HZSubCustomView new];
+    [subView doSomething];
+//    [super viewWillAppear:YES];
 }
 
 - (IBAction)tapNotMainButton:(id)sender {

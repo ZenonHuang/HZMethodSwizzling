@@ -11,6 +11,10 @@
 
 @implementation  HZSubCustomView
 
-
+-(void)doSomething{
+    [super doSomething];
+    
+    NSLog(@"sub do do do");
+}
 
 @end
