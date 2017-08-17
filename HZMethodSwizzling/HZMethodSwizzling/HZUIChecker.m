@@ -85,7 +85,8 @@ static void HZUICheckerForwardInvocation(__unsafe_unretained id slf, SEL selecto
 
 +(void)exchangeMethod:(Class)class{
     
-    NSMutableArray *ignoreMethods = [NSMutableArray arrayWithArray:@[@"retain", @"release", @"dealloc", @".cxx_destruct"]];
+    NSMutableArray *ignoreMethods = [NSMutableArray arrayWithArray:@[@"retain", @"release", @"dealloc", @".cxx_destruct",
+                                                                     @"autorelease", @"forwardInvocation:"]];
     
     unsigned int propertyCount = 0;
     objc_property_t *properties = class_copyPropertyList(class, &propertyCount);
